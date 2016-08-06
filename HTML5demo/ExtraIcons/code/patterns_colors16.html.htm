@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)http://html5.komplett.cc/code/chap_canvas/patterns_colors16.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./patterns_colors16.html_files/figures.css">
+<!-- $Id: patterns_colors16.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/patterns_colors16.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/patterns_colors16.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./patterns_colors16.html_files/figures.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+    var colors = [
+      'white','silver','gray','black',
+      'aqua','teal','blue','navy',
+      'yellow','olive','lime','green',
+      'fuchsia','purple','red','maroon'
+    ];
+
+    // preset font for annotations
+    context.font = 'italic 32px sans-serif';
+    context.textAlign = 'center';
+    context.textBaseline = 'top';
+      
+    // move whole graphic a bit
+    context.translate(70,40);
+      
+    /* create eight patterns sized 10x10 pixels with two colors each,
+       distributed as chess-field - first color top-left/bottom-right,
+       second color top-right/bottom-left
+    */
+    for (var i=0; i<8; i++) {
+      // create in-memory canvas for pattern
+      var cvs = document.createElement("CANVAS");
+      cvs.width = 20;
+      cvs.height = 20;
+      var ctx = cvs.getContext('2d');
+      
+      // define fill pattern
+      ctx.fillStyle = colors[(i*2)+0];
+      ctx.fillRect(0,0,10,10);
+      ctx.fillStyle = colors[(i*2)+1];
+      ctx.fillRect(10,0,10,10);
+      ctx.fillStyle = colors[(i*2)+1];
+      ctx.fillRect(0,10,10,10);
+      ctx.fillStyle = colors[(i*2)+0];
+      ctx.fillRect(10,10,10,10);
+
+      // draw rectangle with pattern and annotation
+      var x = (i%4)*280;
+      var y = (Math.floor(i/4.0))*400;
+      context.save();
+      context.fillStyle = context.createPattern(cvs,'repeat');
+      context.fillRect(x,y,220,220);
+      window.figures.useShadow(context,true);
+      context.strokeRect(x,y,220,220);
+      context.fillStyle = '#000';
+      context.fillText(colors[(i*2)+0],x+110,y+250);
+      context.fillText('+',x+110,y+280);
+      context.fillText(colors[(i*2)+1],x+110,y+310);
+      context.restore();
+    }
+  </script>
+
+
+
+</body></html>

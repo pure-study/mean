@@ -1,0 +1,69 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0058)http://html5.komplett.cc/code/chap_geolocation/simple.html -->
+<!DOCTYPE html><HTML><!-- $Id: simple.html 913 2010-09-11 10:17:35Z bernd $ --><HEAD>
+<TITLE>Simple Geolocation Test</TITLE>
+<META content="text/html; charset=utf-8" http-equiv="Content-Type">
+<STYLE>
+  th { text-align: left; }
+</STYLE>
+
+<SCRIPT>
+function $(id) { return document.getElementById(id); }
+window.onload = function() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        function(pos) { 
+          $("lat").innerHTML = pos.coords.latitude;
+          $("lon").innerHTML = pos.coords.longitude;
+          $("alt").innerHTML = pos.coords.altitude;
+          $("accuracy").innerHTML = pos.coords.accuracy;
+          $("altitudeAccuracy").innerHTML = pos.coords.altitudeAccuracy;
+          $("heading").innerHTML = pos.coords.heading;
+          $("speed").innerHTML = pos.coords.speed;
+          $("timestamp").innerHTML = pos.timestamp;
+            // $("status").innerHTML = JSON.stringify(pos);
+        },
+        function() {},
+        {enableHighAccuracy:true, maximumAge:600000}
+    );
+  } else {
+    $("status").innerHTML = 
+      'No Geolocation support for your Browser';
+  }
+}
+
+</SCRIPT>
+
+<META name="GENERATOR" content="MSHTML 9.00.8112.16430"></HEAD>
+<BODY>
+<DIV><PRE id="status"></PRE></DIV>
+<TABLE style="border: 1px solid currentColor;">
+  <THEAD>
+  <TR> 
+    <TH> Key 
+    <TH> Value    </TR>
+  <TBODY>
+  <TR> 
+    <TH>pos.coords.latitude 
+    <TD id="lat">
+  <TR> 
+    <TH>pos.coords.longitude 
+    <TD id="lon">
+  <TR> 
+    <TH>pos.coords.altitude 
+    <TD id="alt">
+  <TR> 
+    <TH>pos.coords.accuracy 
+    <TD id="accuracy">
+  <TR> 
+    <TH>pos.coords.altitudeAccuracy 
+    <TD id="altitudeAccuracy">
+  <TR> 
+    <TH>pos.coords.heading 
+    <TD id="heading">
+  <TR> 
+    <TH>pos.coords.speed 
+    <TD id="speed">
+  <TR> 
+    <TH>pos.timestamp 
+    <TD id="timestamp"></TR></TBODY></TABLE></BODY></HTML>

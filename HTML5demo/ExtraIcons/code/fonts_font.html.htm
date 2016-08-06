@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)http://html5.komplett.cc/code/chap_canvas/fonts_font.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./fonts_font.html_files/figures.css">
+<!-- $Id: fonts_font.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+<style type="text/css">
+  @font-face {
+    font-family: Scriptina;
+    src: url('fonts/scriptina.ttf');
+  }
+</style>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/fonts_font.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/fonts_font.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./fonts_font.html_files/figures.js"></script>
+  <script>
+  window.onload = function() {
+    var fonts = [
+      'oblique 1.3em monospace',
+      'bolder 110% serif',
+      'x-large "New Century Schoolbook"',
+      'bold italic 16pt Palatino',
+      'normal small-caps 120% Helvetica',
+      'normal 130% Scriptina'   // buggy, see: http://stackoverflow.com/questions/2756575/drawing-text-to-canvas-with-font-face-does-not-work-at-the-first-time
+    ];
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+    context.scale(1.8,1.8);
+
+    var yOff = 0;
+    var t = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+    var t_short = "Lorem ipsum dolor sit amet, consectetur adipiscing";
+
+    context.translate(40,50);
+    for (var i=0; i<fonts.length; i++) {
+      context.save();
+      context.font = '11px monospace';
+      context.fillStyle = '#666';
+      context.fillText("context.font='"+fonts[i]+"'",0,yOff);
+      context.font = fonts[i];
+      context.fillStyle = '#000';
+      window.figures.useShadow(context,true);
+      yOff += 25;
+      if (i==2) {
+        context.fillText(t_short,0,yOff);
+      }
+      else {
+        context.fillText(t,0,yOff);
+      }
+      yOff += 40;
+      context.restore();
+    }
+  };
+  </script>
+
+<h3 style="padding-top:30px;">Anmerkung:</h3>
+<p>
+Zum Zeitpunkt der Manuskripterstellung unterstützte kein Browser <code>@font-face</code> ohne Probleme. Im Fall von Firefox der für den Screenshot verwendet wurde, muss der Webfont <em>Scriptina</em> im HTML-Dokument auch Verwendung finden um geladen zu werden. Die folgende Zeile enthält eine weißen Punkt mit <code>style="font-family:Scriptina"</code> und stellt damit die Verfügbarkeit des Webfonts in Canvas sicher.
+</p>
+<p style="font-family:Scriptina;color:white;">.</p>
+<p>
+Auch das small-caps Beispiel wird von Firefox noch nicht richtig angezeigt.
+</p>
+<p>
+Beide Probleme stellen klare Browser-Bugs dar und sollten in der Zukunft behoben werden.
+</p>
+
+
+
+</body></html>

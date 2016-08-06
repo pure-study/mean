@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<link rel="stylesheet" type="text/css" href="compositing_imageText_files/figures0.css">
+<!-- $Id: compositing_imageText.html 1325 2011-04-02 10:33:58Z klaus $ -->
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/compositing_imageText.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/compositing_imageText_en.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="compositing_imageText_files/figures0.js"></script>
+  <script>
+    var lang = (location.search.search('lang=en') != -1) ? 'en' : 'de';
+    var terms = {
+      'goodNews' : {
+        'de' : '天气不错',
+        'en' : 'Good news for web developers'
+      }
+    };
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+    // move down a bit
+    context.translate(0,50);
+
+    var image = new Image();
+    image.src = 'images/yosemite.jpg';
+    image.onload = function() {
+      context.drawImage(image,0,0,1200,600);
+      context.globalCompositeOperation = 'destination-in';
+
+      context.font = 'bold 600px sans-serif';
+      context.textAlign = 'center';
+      context.textBaseline = 'top';
+      context.lineWidth = 60;
+      context.lineCap = 'round';
+      context.lineJoin = 'round';
+      context.strokeText('HTML5',600,50,1080);
+
+      context.globalCompositeOperation = 'source-over';
+
+      context.font = '96px monospace';
+      context.fillStyle = '#AAA';
+      context.textAlign = 'left';
+      window.figures.useShadow(context,true);
+      context.fillText(terms['goodNews'][lang],70,600,1060);
+    };
+    
+  </script>
+
+</body>
+</html>
+
+<!-- This document saved from http://html5.komplett.cc/code/chap_canvas/compositing_imageText.html?lang=en -->

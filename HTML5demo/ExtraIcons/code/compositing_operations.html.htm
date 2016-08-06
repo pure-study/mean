@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)http://html5.komplett.cc/code/chap_canvas/compositing_operations.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./compositing_operations.html_files/figures.css">
+<!-- $Id: compositing_operations.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/compositing_operations.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/compositing_operations.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./compositing_operations.html_files/figures.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+    var operations = [
+      'source-over','source-in','source-out','source-atop',
+      'destination-over','destination-in','destination-out',
+      'destination-atop','lighter','copy','xor'
+    ];
+    var duftnames = [
+      'A over B','A in B','A out B','A atop B',
+      'B over A','B in A','B out A',
+      'B atop A','A plus B','A (B is ignored)','A xor B',''
+    ];
+
+    // move everything down a bit
+    context.translate(0,40);
+
+    // create eleven figures
+    for (var i=0; i<operations.length; i++) {
+      // prepare each figure in memory
+      var cvs = document.createElement("CANVAS");
+      cvs.width = 300;
+      cvs.height = 200;
+      var ctx = cvs.getContext('2d');
+      ctx.translate(150,0);
+
+      ctx.fillStyle = 'cornflowerblue';
+      ctx.fillRect(-50,0,100,100);
+      ctx.globalCompositeOperation = operations[i];
+      ctx.beginPath();
+      ctx.arc(50,100,60,0,2*Math.PI,0);
+      ctx.fillStyle = 'crimson';
+      ctx.fill();
+
+      // add prepared figure to main canvas
+      var x = i % 4 * 300;
+      var y = Math.floor(i / 4.0) * 250;
+
+      // indicate original shapes in light gray
+      context.strokeStyle = '#CCC';
+      context.lineWidth = 0.5;
+      context.strokeRect(x+100,y,100,100);
+      context.beginPath();
+      context.arc(x+200,y+100,60,0,2*Math.PI,0);
+      context.stroke();
+
+      // draw result of globalCompositeOperation
+      context.drawImage(cvs,x,y);
+
+      // add annotation
+      context.save();
+      context.translate(x+150,y);
+      window.figures.useShadow(context,true);
+      context.fillStyle = '#000';
+      context.font = '30px sans-serif';
+      context.textAlign = 'center';
+      context.textBaseline = 'bottom';
+      context.globalCompositeOperation = 'source-over';
+      context.fillText(operations[i],0,200);
+      context.font = 'italic 18px sans-serif';
+      //context.fillStyle = '#666';
+      context.fillText(duftnames[i],0,225);
+      context.restore();
+    }
+
+    // add vendor-specific option
+    var x = 11 % 4 * 300;
+    var y = Math.floor(11 / 4.0) * 250;
+    context.translate(x+150,y+100);
+    window.figures.useShadow(context,true);
+    context.fillStyle = '#DDD';
+    context.font = '72px sans-serif';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText('?',0,0);
+    context.font = 'italic 30px sans-serif';
+    context.fillStyle = '#000';
+    context.textBaseline = 'bottom';
+    context.fillText('vendorName-*',0,100);
+
+  </script>
+
+
+
+</body></html>

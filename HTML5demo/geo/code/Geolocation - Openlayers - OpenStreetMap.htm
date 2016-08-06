@@ -1,0 +1,69 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0066)http://html5.komplett.cc/code/chap_geolocation/openlayers_osm.html -->
+<!DOCTYPE html><HTML><HEAD><TITLE>Geolocation - Openlayers / 
+OpenStreetMap</TITLE>
+<META content="text/html; charset=utf-8" http-equiv="Content-Type"><!-- $Id: openlayers_osm.html 1232 2011-01-14 10:41:38Z bernd $ -->
+<SCRIPT src="Geolocation%20-%20Openlayers%20-%20OpenStreetMap_files/OpenLayers.js"></SCRIPT>
+
+<SCRIPT src="Geolocation%20-%20Openlayers%20-%20OpenStreetMap_files/OpenStreetMap.js">
+</SCRIPT>
+
+<SCRIPT>
+  window.onload = function() {
+    var lat = 47;
+    var lon = 11;
+    var zoom = 14;
+
+    // initialize map
+    var map = new OpenLayers.Map ("map");
+    map.addControl(new OpenLayers.Control.Navigation());
+    map.addControl(new OpenLayers.Control.PanZoomBar());
+
+    // add layer switcher with four layers
+    map.addControl(new OpenLayers.Control.LayerSwitcher());
+    map.addLayers([
+      new OpenLayers.Layer.OSM.Mapnik("Mapnik"),
+      new OpenLayers.Layer.OSM.Osmarender("Osmarender"),
+      // new OpenLayers.Layer.OSM.Maplint("Maplint"),
+      new OpenLayers.Layer.OSM.CycleMap("CycleMap")
+    ]);
+ 
+    // add a marker layer and indicate current position
+    var markers = new OpenLayers.Layer.Markers("Markers");
+    map.addLayer(markers);
+
+    // get position and recenter map
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+          function(pos) { 
+            var ll = new OpenLayers.LonLat(
+              pos.coords.longitude,
+              pos.coords.latitude).transform(
+                new OpenLayers.Projection("EPSG:4326"),
+                map.getProjectionObject()
+              );
+            map.setCenter (ll,zoom);
+            markers.addMarker(
+              new OpenLayers.Marker(
+              ll,new OpenLayers.Icon(
+'http://www.openstreetmap.org/openlayers/img/marker.png')
+              )
+            );
+          },
+          function() {},
+          {enableHighAccuracy: true, maximumAge: 600000}
+      );
+    } else {
+      // set center of map
+      var lonLat = new OpenLayers.LonLat(lon, lat).transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjectionObject()
+      );
+      map.setCenter (lonLat,zoom);
+    }
+  }
+</SCRIPT>
+
+<META name="GENERATOR" content="MSHTML 9.00.8112.16430"></HEAD>
+<BODY>
+<DIV style="left: 0px; top: 0px; right: 0px; bottom: 0px; position: fixed;" id="map"></DIV></BODY></HTML>

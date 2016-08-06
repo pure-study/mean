@@ -1,0 +1,11 @@
+/*****
+*
+* $Id: figures.css 147 2010-02-15 14:45:05Z klaus $
+* commmon style-sheet for figures
+*
+*****/
+
+figure {
+  display: block;
+  text-align: center;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)paths_nonzeroRule.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./paths_nonzeroRule.html_files/figures.css">
+<!-- $Id: paths_nonzeroRule.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="screenshots/paths_nonzeroRule.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="screenshots/paths_nonzeroRule.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./paths_nonzeroRule.html_files/figures.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+    // circle with anticlockwise
+    var circle = function(cx,cy,r,anticlockwise) {
+      context.moveTo(cx+r,cy);
+      context.arc(cx,cy,r,0,Math.PI*2.0,anticlockwise);
+    };
+
+    // use a shadow for the rest :)
+    window.figures.useShadow(context,true);
+
+    // same direction
+    context.beginPath();
+    context.fillStyle = 'yellow';
+    circle(300,400,240,0);
+    circle(300,400,120,0);
+    context.fill();
+    context.stroke();
+
+    // arrows left
+    window.figures.drawArrow(context,300,160,0,50,40,"#000",true);
+    window.figures.drawArrow(context,420,400,90,50,40,"#000",true);
+
+    context.beginPath();
+    context.fillStyle = 'yellow';
+    circle(900,400,240,0);
+    circle(900,400,120,1);
+    context.fill();
+    context.stroke();
+
+    // arrows right
+    window.figures.drawArrow(context,900,160,0,50,40,"#000",true);
+    window.figures.drawArrow(context,1020,400,-90,50,40,"#000",false);
+  </script>
+
+
+
+</body></html>

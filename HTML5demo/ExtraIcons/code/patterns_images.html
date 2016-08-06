@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<link rel="stylesheet" type="text/css" href="patterns_images_files/figures0.css">
+<!-- $Id: patterns_images.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/patterns_images.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/patterns_images.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="patterns_images_files/figures0.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+    // start with semi-transparent background pattern
+    var bg = new Image();
+    bg.src = 'icons/pattern_125.png'; // http://www.squidfingers.com/files/patterns/pattern_125.zip
+    bg.onload = function() {
+      context.globalAlpha = 0.5;
+      context.fillStyle = context.createPattern(bg,'repeat');
+      context.fillRect(0,0,canvas.width,canvas.height);
+      context.globalAlpha = 1.0;
+
+      // use a shadow for the rest
+      window.figures.useShadow(context,true);
+
+      // add image pattern and cut out extents
+      var image = new Image();
+      image.src = 'images/yosemite.jpg';
+      image.onload = function() {
+        context.fillStyle = context.createPattern(image,'no-repeat');
+        context.strokeStyle = '#FFF';
+        context.lineWidth = 3;
+
+        var extents = [
+          { x:20, y:50, width:120,height:550 },
+          { x:100,y:170,width:520,height:350 },
+          { x:320,y:250,width:150,height:500 },
+          { x:440,y:600,width:425,height:180 },
+          { x:600,y:280,width:350,height:370 },
+          { x:760,y:225,width:410,height:160 },
+          { x:900,y:520,width:270,height:240 },
+          { x:970,y:420,width:50,height:50 }
+        ];
+        for (var i=0; i<extents.length; i++) {
+          var d = extents[i]; // short-cut
+          context.fillRect(d.x,d.y,d.width,d.height);
+          context.strokeRect(d.x,d.y,d.width,d.height);
+        }
+
+        // add title with another pattern
+        var pat = new Image();
+        pat.src = 'icons/pattern_107.png'; // http://www.squidfingers.com/files/patterns/pattern_107.zip
+        pat.onload = function() {
+          context.fillStyle = context.createPattern(pat,'repeat');
+          context.font = 'bold 160px sans-serif';
+          context.fillText('Yosemite!',200,150);
+          context.strokeText('Yosemite!',200,150);
+
+          // add graphic legend
+          context.font = 'italic 24px sans-serif';
+          context.fillStyle = '#000';
+          context.strokeStyle = '#FFF';
+          context.lineWidth = 1;
+
+          // background pattern
+          context.drawImage(bg,0,678);
+          context.strokeRect(0,678,174,113);
+          context.fillText('pattern_125.png',5,670,164);
+
+          // title pattern
+          context.drawImage(pat,672,180);
+          context.strokeRect(672,180,32,30);
+          context.textBaseline = 'middle';
+          context.fillText('pattern_107.png',710,195,164);
+
+          // indicate main image
+          context.fillText('yosemite.jpg',1030,445,140);
+          
+        };
+      };
+    };
+  </script>
+
+</body>
+</html>
+
+<!-- This document saved from http://html5.komplett.cc/code/chap_canvas/patterns_images.html -->

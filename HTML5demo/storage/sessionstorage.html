@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)http://html5.komplett.cc/code/chap_storage/sessionStorageCookie.html -->
+<html><!-- $Id: sessionStorageCookie.html 569 2010-07-23 19:01:08Z bernd $ --><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>sessionStorage Demo</title>
+  <script>
+    window.onload = function() {
+      var currDate = new Date();
+      sessionStorage.setItem("currenttime", 
+        currDate.toLocaleString());
+      document.cookie = 
+        "currenttime="+currDate.toLocaleString();
+      updateHTML();
+    }
+    function updateHTML() {
+      document.getElementById("currenttime").textContent = 
+        sessionStorage.getItem("currenttime");
+      document.getElementById("currtimeCookie").textContent 
+        = getCookie("currenttime");
+    }
+    function getCookie(cookie_name) {
+      // idea from http://www.elated.com/articles/javascript-and-cookies/
+      var cookie_res = document.cookie.match('(^|;) ?'+
+        cookie_name+'=([^;]*)(;|$)');
+      if (cookie_res) {
+        return(unescape(cookie_res[2]));
+      } else {
+        return("");
+      }
+    }
+  </script>
+  </head><body><button onclick="updateHTML()">update HTML</button>
+  <p>sessionStorage: <span id="currenttime">Tue Aug 09 2011 16:54:38 GMT+0800 (China Standard Time)</span>
+  </p><p>cookie: <span id="currtimeCookie">Tue Aug 09 2011 16:54:38 GMT+0800 (China Standard Time)</span>
+
+</p></body></html>

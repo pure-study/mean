@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)paths_methods.html#lineTo -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./paths_methodslinesto.html_files/figures.css">
+<!-- $Id: paths_methods.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht.
+    Screenshots der erzeugten Grafiken finden sie hier:<br>
+    Your Browser does not support canvas. Screenshots of the
+    produced graphics are available here:<br>
+    <a href="screenshots/paths_methods_arc.jpg">arc</a>,
+    <a href="screenshots/paths_methods_arcTo.jpg">arcTo</a>,
+    <a href="screenshots/paths_methods_bezierCurveTo.jpg">bezierCurveTo</a>,
+    <a href="screenshots/paths_methods_lineTo.jpg">lineTo</a>,
+    <a href="screenshots/paths_methods_quadraticCurveTo.jpg">quadraticCurveTo</a>,
+    <a href="screenshots/paths_methods_rect.jpg">rect</a>
+  </canvas>
+</figure>
+
+  <script src="./paths_methodslinesto.html_files/figures.js"></script>
+  <script src="./paths_methodslinesto.html_files/pathsMethods.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+    if (location.hash != '') {
+        var func = location.hash.replace("#","");
+        context.scale(5.0,5.0);
+        context.translate(50,5);
+        context.lineWidth = 0.5;
+        window[func]();
+    }
+    else {
+      // resize canvas
+      context.scale(1.9,1.9);
+      // draw all figures
+      context.translate(30,15);
+      skeleton(0,0,150,150,'lineTo','x,y');
+      lineTo(1);
+
+      context.translate(210,0);
+      skeleton(0,0,150,150,'quadraticCurveTo','cpx,cpy,x,y');
+      quadraticCurveTo(1);
+
+      context.translate(210,0);
+      skeleton(0,0,150,150,'bezierCurveTo','cp1x,cp1y,cp2x,cp2y,x,y');
+      bezierCurveTo(1);
+
+      context.translate(-420,210);
+      skeleton(0,0,150,150,'arcTo','x1,y1,x2,y2,radius');
+      arcTo(1);
+
+      context.translate(210,0);
+      skeleton(0,0,150,150,'arc','x,y,radius,startAngle,endAngle,anticlockwise');
+      arc(1);
+
+      context.translate(210,0);
+      skeleton(0,0,150,150,'rect','x,y,w,h');
+      rect(1);
+    }
+  </script>
+
+
+
+</body></html>

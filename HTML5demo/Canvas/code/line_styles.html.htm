@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)line_styles.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./line_styles.html_files/figures.css">
+<!-- $Id: line_styles.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="screenshots/line_styles.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="screenshots/line_styles.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./line_styles.html_files/figures.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+    /*****
+    * lineCap
+    *****/
+    context.setTransform(1,0,0,1,20,440);
+    context.scale(1.9,1.9);
+
+    // text
+    context.save();
+    window.figures.useShadow(context,true);
+    context.textAlign = 'left';
+    context.font = '18px sans-serif';
+    context.fillText('context.lineCap',20,-30);
+
+    context.textAlign = 'center';
+    context.font = '16px sans-serif';
+    context.fillText('butt',50,10);
+    context.fillText('round',125,10);
+    context.fillText('square',200,10);
+    context.restore();
+
+    // baseline
+    context.beginPath();
+    context.strokeStyle = '#666';
+    context.lineWidth = 1.0;
+    context.moveTo(20,50);
+    context.lineTo(230,50);
+    context.stroke();
+
+    // thick line
+    context.strokeStyle = 'black';
+    context.lineWidth = 30.0;
+
+    // butt
+    context.beginPath();
+    context.lineCap = 'butt';
+    context.moveTo(50,130);
+    context.lineTo(50,50);
+    context.stroke();
+    
+    // round
+    context.beginPath();
+    context.lineCap = 'round';
+    context.moveTo(125,130);
+    context.lineTo(125,50);
+    context.stroke();
+    
+    //square
+    context.beginPath();
+    context.lineCap = 'square';
+    context.moveTo(200,130);
+    context.lineTo(200,50);
+    context.stroke();
+    
+
+    /*****
+    * lineJoin
+    *****/
+    context.setTransform(1,0,0,1,560,440);
+    context.scale(1.9,1.9);
+
+    // text
+    context.save();
+    window.figures.useShadow(context,true);
+    context.textAlign = 'right';
+    context.font = '18px sans-serif';
+    context.fillText('context.lineJoin',280,-30);
+
+    context.textAlign = 'center';
+    context.font = '16px sans-serif';
+    context.fillText('bevel',50,10);
+    context.fillText('round',150,10);
+    context.fillText('miter',250,10);
+    context.restore();
+
+    // baseline
+    context.beginPath();
+    context.lineWidth = 1.0;
+    context.moveTo(20,50);
+    context.lineTo(280,50);
+    context.stroke();
+
+    // thick line
+    context.lineWidth = 20.0;
+
+    // miter
+    context.beginPath();
+    context.lineJoin = 'bevel';
+    context.moveTo(20,130);
+    context.lineTo(50,50);
+    context.lineTo(80,130);
+    context.stroke();
+    
+    // round
+    context.beginPath();
+    context.lineJoin = 'round';
+    context.moveTo(120,130);
+    context.lineTo(150,50);
+    context.lineTo(180,130);
+    context.stroke();
+    
+    //bevel
+    context.beginPath();
+    context.lineJoin = 'miter';
+    context.moveTo(220,130);
+    context.lineTo(250,50);
+    context.lineTo(280,130);
+    context.stroke();
+
+
+    /*****
+    * lineWidth
+    *****/
+    context.setTransform(1,0,0,1,20,160);
+    context.scale(1.9,1.9);
+
+    // text
+    context.save();
+    window.figures.useShadow(context,true);
+    context.textAlign = 'left';
+    context.textBaseline = 'middle';
+    context.font = '18px sans-serif';
+    context.fillText('context.lineWidth',20,0);
+    context.restore();
+
+    context.translate(215,0);
+    context.lineCap = 'butt';
+    context.font = '16px sans-serif';
+    var gap = 50;
+    var xOff = 0;
+    for (var i=0; i<7; i++) {
+        context.beginPath();
+        context.moveTo(xOff,0);
+        context.lineTo(xOff+gap,0);
+        context.lineWidth = (i+1)*5;
+        context.stroke();
+
+        context.save();
+        window.figures.useShadow(context,true);
+        context.lineWidth = 0.0;
+        context.textAlign = 'center';
+        context.fillText(((i+1)*5),(xOff+(gap/2.0)),-30);
+        context.restore();
+
+        xOff += gap;
+    }
+  </script>
+
+
+
+</body></html>

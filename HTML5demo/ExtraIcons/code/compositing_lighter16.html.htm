@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)http://html5.komplett.cc/code/chap_canvas/compositing_lighter16.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./compositing_lighter16.html_files/figures.css">
+<!-- $Id: compositing_lighter16.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/compositing_lighter16.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/compositing_lighter16.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./compositing_lighter16.html_files/figures.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+    var colors = [
+        'white','silver','gray','black',
+        'aqua','teal','blue','navy',
+        'yellow','olive','lime','green',
+        'fuchsia','purple','red','maroon'
+    ];
+
+    var img = document.createElement("IMG");
+    img.src = 'images/yosemite.jpg';
+    img.onload = function() {
+      // move right and down
+      context.translate(105,30);
+
+      // draw compositeOperation for 16 named colors
+      for (var i=0; i<colors.length; i++) {
+        var x = i % 4 * 260;
+        var y = Math.floor(i/4) * 190;
+
+        // composite image with colored rect
+        context.save();
+        context.translate(x,y);
+        context.drawImage(img,0,0,210,140);
+        context.globalCompositeOperation = 'lighter';
+        context.fillStyle = colors[i];
+        context.fillRect(0,0,210,140);
+
+        // reset 'lighter' and add border
+        context.globalCompositeOperation = 'source-over';
+        context.strokeStyle = '#DDD';
+        context.strokeRect(0,0,210,140);
+
+        // add annotation
+        window.figures.useShadow(context,true);
+        context.font = 'italic 28px sans-serif';
+        context.textAlign = 'center';
+        context.textBaseline = 'top';
+        context.fillStyle = '#000';
+        context.fillText(colors[i],0+210/2.0,0+140+10);
+
+        context.restore();
+      }
+    };
+
+  </script>
+
+
+
+</body></html>

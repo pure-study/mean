@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)helper_circle_sector.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./helper_circle_sector.html_files/figures.css">
+<!-- $Id: helper_circle_sector.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="screenshots/helper_circle_sector.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="screenshots/helper_circle_sector.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./helper_circle_sector.html_files/figures.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+    var circle = function(cx,cy,r) {
+      context.moveTo(cx+r,cy);
+      context.arc(cx,cy,r,0,Math.PI*2.0,0);
+    };
+    var sector = function(cx,cy,r,startAngle,endAngle,anticlockwise) {
+      context.moveTo(cx,cy);
+      context.arc(
+        cx,cy,r,
+        startAngle*(Math.PI/180.0),
+        endAngle*(Math.PI/180.0),
+        anticlockwise
+      );
+      context.closePath();
+    }
+
+    context.beginPath();
+    circle(300,400,250);
+    circle(300,400,160);
+    circle(300,400,60);
+    sector(905,400,250,-90,30,0);
+    sector(900,410,280,30,150,0);
+    sector(895,400,230,150,270,0);
+    context.stroke();
+    
+  </script>
+
+
+
+</body></html>

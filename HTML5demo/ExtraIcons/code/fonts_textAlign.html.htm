@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)http://html5.komplett.cc/code/chap_canvas/fonts_textAlign.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./fonts_textAlign.html_files/figures.css">
+<!-- $Id: fonts_textAlign.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body dir="ltr">
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/fonts_textAlign.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/fonts_textAlign.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./fonts_textAlign.html_files/figures.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+    window.figures.useShadow(context,true);
+
+    // set font-size and alignment for template string
+    context.font = '54px sans-serif';
+    context.textAlign = 'center';
+
+    // define width of template string
+    var w = context.measureText('Lorem ipsum dolor sit amet.').width;
+    var xl = 600-(w/2.0);
+    var xc = 600;
+    var xr = 600+(w/2.0)
+    
+    // first row
+    context.save();
+    context.translate(0,140);
+    window.figures.useShadow(context,true);
+    context.font = '54px sans-serif';
+    context.textBaseline = 'bottom';
+    context.fillText('Lorem ipsum dolor sit amet.',xc,0);
+    context.font = '32px sans-serif';
+    context.textBaseline = 'top';
+    context.fillText('left',xl,50);
+    context.fillText('center',xc,50);
+    context.fillText('right',xr,50);
+    window.figures.useShadow(context,false);
+    context.beginPath();
+    context.strokeStyle = '#666';
+    context.moveTo(xl,0); context.lineTo(xl,45);
+    context.moveTo(xc,0); context.lineTo(xc,45);
+    context.moveTo(xr,0); context.lineTo(xr,45);
+    context.stroke();
+    window.figures.drawArrow(context,xl,0,-90,15,10,'#666');
+    window.figures.drawArrow(context,xc,0,-90,15,10,'#666');
+    window.figures.drawArrow(context,xr,0,-90,15,10,'#666');
+    context.restore();
+
+    // second row
+    context.save();
+    context.translate(0,400);
+    window.figures.useShadow(context,true);
+    context.font = '54px sans-serif';
+    context.textBaseline = 'bottom';
+    context.fillText('Lorem ipsum dolor sit amet.',xc,0);
+    context.font = '32px sans-serif';
+    context.textBaseline = 'top';
+    context.fillText('start',xl,50);
+    context.fillText('end',xr,50);
+    context.font = '24px sans-serif';
+    context.fillStyle = 'green';
+    context.fillText('document.dir="ltr"',xc,25);
+    window.figures.useShadow(context,false);
+    context.beginPath();
+    context.strokeStyle = '#666';
+    context.moveTo(xl,0); context.lineTo(xl,45);
+    context.moveTo(xr,0); context.lineTo(xr,45);
+    context.stroke();
+    window.figures.drawArrow(context,xl,0,-90,15,10,'#666');
+    window.figures.drawArrow(context,xr,0,-90,15,10,'#666');
+    context.restore();
+
+    // third row
+    context.save();
+    context.translate(0,640);
+    window.figures.useShadow(context,true);
+    context.font = '54px sans-serif';
+    context.textBaseline = 'bottom';
+    document.dir = 'rtl';
+    context.fillText('Lorem ipsum dolor sit amet.',xc,0);
+    document.dir = 'ltr';
+    context.font = '32px sans-serif';
+    context.textBaseline = 'top';
+    context.fillText('end',xl,50);
+    context.fillText('start',xr,50);
+    context.font = '24px sans-serif';
+    context.fillStyle = 'blue';
+    context.fillText('document.dir="rtl"',xc,25);
+    window.figures.useShadow(context,false);
+    context.beginPath();
+    context.strokeStyle = '#666';
+    context.moveTo(xl,0); context.lineTo(xl,45);
+    context.moveTo(xr,0); context.lineTo(xr,45);
+    context.stroke();
+    window.figures.drawArrow(context,xl,0,-90,15,10,'#666');
+    window.figures.drawArrow(context,xr,0,-90,15,10,'#666');
+    context.restore();
+
+  </script>
+
+
+
+</body></html>

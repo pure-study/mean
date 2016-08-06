@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)gradients_linear.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./gradients_linear.html_files/figures.css">
+<!-- $Id: gradients_linear.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="screenshots/gradients_linear.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="screenshots/gradients_linear.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./gradients_linear.html_files/figures.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+    // center
+    context.setTransform(1,0,0,1,100,0);
+
+    // draw linear gradient
+    var grad = context.createLinearGradient(
+      0,450,1000,450
+    );
+    grad.addColorStop(0.0,'red');
+    grad.addColorStop(0.5,'yellow');
+    grad.addColorStop(0.7,'orange');
+    grad.addColorStop(1.0,'purple');
+    context.fillStyle = grad;
+    context.fillRect(0,450,1000,300);
+    context.strokeRect(0,450,1000,300);
+
+    // add color-squares and annotation
+    var marker = function(offset,color) {
+      var mw = 80;
+      var mh = 80;
+      var xOff = offset*1000;
+      context.beginPath();
+      context.moveTo(xOff,mh+90);
+      context.lineTo(xOff,450);
+      context.strokeStyle = '#AAA';
+      context.stroke();
+
+      context.fillStyle = color;
+      context.fillRect(xOff-(mw/2.0),90,mw,mh);
+      context.strokeStyle = '#000';
+      context.strokeRect(xOff-(mw/2.0),90,mw,mh);
+
+      window.figures.useShadow(context,true);
+      context.fillStyle = 'black';
+      context.textAlign = 'center';
+      context.font = '32px sans-serif';
+      context.fillText(offset,xOff,450-10);
+      context.font = 'italic 32px sans-serif';
+      context.textBaseline = 'bottom';
+      context.fillText(color,xOff,75);
+      window.figures.useShadow(context,false);
+    };
+    marker(0.0,'red');
+    marker(0.5,'yellow');
+    marker(0.7,'orange');
+    marker(1.0,'purple');
+
+  </script>
+
+
+
+</body></html>

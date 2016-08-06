@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)gradients_radial.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./gradients_radial.html_files/figures.css">
+<!-- $Id: gradients_radial.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="screenshots/gradients_radial.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="screenshots/gradients_radial.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./gradients_radial.html_files/figures.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+    // helper function for drawing circles
+    var _fillCircle = function(cx,cy,r) {
+      context.beginPath();
+      context.moveTo(cx+r,cy);
+      context.arc(cx,cy,r,0,Math.PI*2.0,0);
+      context.fill();
+    };
+    var _strokeCircle = function(cx,cy,r) {
+      context.beginPath();
+      context.moveTo(cx+r,cy);
+      context.arc(cx,cy,r,0,Math.PI*2.0,0);
+      context.stroke();
+    };
+
+    /*****
+    /* schematic circles on the left
+    *****/
+    context.setTransform(1,0,0,1,30,0);
+    
+    // cirlces
+    _strokeCircle(200,400,200);
+    _strokeCircle(260,320,40);
+
+    // indicate circle centers
+    context.strokeStyle = '#666';
+    context.beginPath();
+    context.moveTo(260,320);
+    context.lineTo(100,120);
+    context.stroke();
+    context.beginPath();
+    context.moveTo(200,400);
+    context.lineTo(100,680);
+    context.stroke();
+
+    _fillCircle(260,320,6);
+    _fillCircle(200,400,6);
+    
+    // add labels
+    window.figures.useShadow(context,true);
+    context.font = '32px sans-serif';
+    context.textBaseline = 'bottom';
+    context.textAlign = 'center';
+    context.fillText('x0,y0,r0',100,120);
+    context.textBaseline = 'top';
+    context.textAlign = 'center';
+    context.fillText('x1,y1,r1',100,690);
+    window.figures.useShadow(context,false);
+
+    /*****
+    * colorStop rectangles in the middle
+    *****/
+    context.setTransform(1,0,0,1,550,150);
+    context.fillStyle = 'yellow';
+    context.fillRect(0,0,100,100);
+    context.fillStyle = 'orange';
+    context.fillRect(0,200,100,100);
+    context.fillStyle = 'white';
+    context.fillRect(0,400,100,100);
+    context.strokeStyle = '#666';
+    context.strokeRect(0,0,100,100);
+    context.strokeStyle = '#666';
+    context.strokeRect(0,200,100,100);
+    context.strokeStyle = '#666';
+    context.strokeRect(0,400,100,100);
+
+    // add labels
+    window.figures.useShadow(context,true);
+    context.fillStyle = '#000';
+    context.font = '32px sans-serif';
+    context.textBaseline = 'middle';
+    context.textAlign = 'center';
+    context.fillText('0.0',50,50);
+    context.fillText('0.9',50,250);
+    context.fillText('1.0',50,450);
+    context.font = 'italic 32px sans-serif';
+    context.fillText('yellow',50,130);
+    context.fillText('orange',50,330);
+    context.fillText('rgba(0,0,0,0)',50,530);
+    window.figures.useShadow(context,false);
+
+    /*****
+    /* resulting gradient on the right
+    *****/
+    context.setTransform(1,0,0,1,770,0);
+    var radGrad = context.createRadialGradient(
+      260,320,40,200,400,200
+    );
+    radGrad.addColorStop(0.0, 'yellow');
+    radGrad.addColorStop(0.9, 'orange');
+    radGrad.addColorStop(1.0, 'rgba(0,0,0,0)');
+    context.fillStyle = radGrad;
+    context.fillRect(0,200,400,400);
+    
+    /*****
+    /* +/- signs as connectors
+    *****/
+    context.setTransform(1,0,0,1,600,400);
+    context.fillStyle = '#000';
+    context.font = '96px sans-serif';
+    context.textBaseline = 'middle';
+    context.textAlign = 'center';
+    context.fillText('+',-110,0);
+    context.fillText('=',110,0);
+    window.figures.useShadow(context,true);
+
+  </script>
+
+
+
+</body></html>

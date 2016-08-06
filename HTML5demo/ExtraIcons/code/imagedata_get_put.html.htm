@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)http://html5.komplett.cc/code/chap_canvas/imagedata_get_put.html?lang=en -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./imagedata_get_put.html_files/figures.css">
+<!-- $Id: imagedata_get_put.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/imagedata_get_put.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="http://html5.komplett.cc/code/chap_canvas/screenshots/imagedata_get_put_en.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./imagedata_get_put.html_files/figures.js"></script>
+  <script>
+    var lang = (location.search.search('lang=en') != -1) ? 'en' : 'de';
+    var terms = {
+      'original' : {
+        'de' : 'original',
+        'en' : 'original'
+      },
+      'modified' : {
+        'de' : 'modifiziert',
+        'en' : 'modified'
+      }
+    };
+
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+    // resize to double size
+    context.scale(2,2);
+
+    /* compare original with modified canvas - do not compute modified
+       version using Math.random() in this graphic to allow for
+       reproducable screenshots (i.e. use predefined colors below :)
+    */
+    var w = 100;
+    var colors = [
+      [ [0,0,128,255],[0,128,128,255],[0,255,0,255],[255,255,0,255] ],
+      [ [103,142,242,255],[137,106,107,255],[121,196,21,255],[92,232,32,255] ]
+    ];
+    var _2rgba = function(arr) {
+      return 'rgba('+arr[0]+','+arr[1]+','+arr[2]+','+arr[3]+')';
+    };
+
+    context.save();
+    // start with cavases and annotation
+    context.translate(w/2.0,w/1.5);
+    for (var i=0; i<colors.length; i++) {
+      // draw visual presentation of both 4pixel canvases
+      context.fillStyle = _2rgba(colors[i][0]);
+      context.fillRect(0,0,w,w);
+      context.fillStyle = _2rgba(colors[i][1]);
+      context.fillRect(w,0,w,w);
+      context.fillStyle = _2rgba(colors[i][2]);
+      context.fillRect(0,w,w,w);
+      context.fillStyle = _2rgba(colors[i][3]);
+      context.fillRect(w,w,w,w);
+
+      // add CanvasPixelArray values as text with colored rects
+      var yOff = (w*2)+(w/3.0);
+      context.save();
+      window.figures.useShadow(context,true);
+      context.font = '12px monospace';
+      context.fillStyle = '#000';
+      context.fillText('CanvasPixelArray = [',w/3.0,yOff);
+      for (var j=0; j<colors[i].length; j++) {
+        // add rgba-values
+        yOff += 16;
+        var t = '    '+colors[i][j];
+        t += (j<3) ? ',' : '';
+        context.fillText(t,w/3.0,yOff);
+
+        // add colored rect representing current pixel-color
+        context.save();
+        context.fillStyle = _2rgba(colors[i][j]);
+        context.fillRect(w/3.0+10,yOff-10,10,10);
+        context.restore();
+      }
+      yOff += 16;
+      context.fillText(']',w/3.0,yOff);
+      context.restore();
+
+      // move right a bit
+      context.translate(w*3,0);
+    }
+    context.restore();
+
+    // add titles
+    context.save();
+    window.figures.useShadow(context,true);
+    context.font = '24px sans-serif';
+    context.textAlign = 'center';
+    context.fillStyle = '#000';
+    context.fillText(terms['original'][lang],w+(w/2.0),w/2.0);
+    context.fillText(terms['modified'][lang],(w*4)+(w/2.0),w/2.0);
+
+  </script>
+
+
+
+</body></html>

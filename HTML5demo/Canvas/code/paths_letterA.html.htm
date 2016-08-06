@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)paths_letterA.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./paths_letterA.html_files/figures.css">
+<!-- $Id: paths_letterA.html 1139 2010-12-29 12:57:31Z klaus $ -->
+<title></title>
+</head>
+<body>
+
+<figure>
+  <canvas width="1200" height="800" style="border: 1px dotted black;">
+    Ihr Browser unterstützt Canvas leider nicht. Einen Screenshot
+    dieser Grafik finden sie <a href="screenshots/paths_letterA.jpg">hier</a><br>
+    Your Browser does not support canvas. A screenshot of this
+    graphic is available <a href="screenshots/paths_letterA.jpg">here</a>
+  </canvas>
+</figure>
+
+  <script src="./paths_letterA.html_files/figures.js"></script>
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+    context.translate(100,80);
+    context.scale(0.8,0.8);
+
+    // draw grid 1000x600
+    context.strokeStyle = 'rgba(0,0,0,0.5)';
+    context.lineWidth = 0.5;
+    for (var xOff=0; xOff<=1200; xOff+=100) {
+      // vertical lines
+      context.beginPath();
+      context.moveTo(xOff,0);
+      context.lineTo(xOff,800);
+      context.stroke();
+    }
+    for (var yOff=0; yOff<=800; yOff+=100) {
+      // horizontal lines
+      context.beginPath();
+      context.moveTo(0,yOff);
+      context.lineTo(1200,yOff);
+      context.stroke();
+    }
+    // mark x/y direction and 0/0
+    context.beginPath();
+    context.strokeStyle = 'rgba(0,0,0,1)';
+    context.lineWidth = 1;
+    context.beginPath();
+    context.moveTo(0,0);
+    context.lineTo(1200,0);
+    context.moveTo(0,0);
+    context.lineTo(0,800);
+    context.stroke();
+
+    // draw direction arrows
+    window.figures.drawArrow(context,1200,0);
+    window.figures.drawArrow(context,0,800,90);
+
+    // add 0/0 and dimensions annotation
+    window.figures.useShadow(context,true);
+    context.font = '32px sans-serif';
+    context.textAlign = 'center';
+    context.fillText('0/0',-10,-10);
+    context.textAlign = 'start';
+    context.textBaseline = 'middle';
+    context.fillText('1200px',1210,0);
+    context.textAlign = 'center';
+    context.textBaseline = 'top';
+    context.fillText('800px',0,810);
+
+    // draw letter A
+    context.beginPath();
+    context.moveTo(300,700);
+    context.lineTo(600,100);
+    context.lineTo(900,700);
+    context.moveTo(350,400);
+    context.lineTo(850,400);
+    context.lineWidth = 4;
+    context.stroke();
+
+    window.figures.useShadow(context,true);
+    context.textAlign = 'center';
+    context.textBaseline = 'alphabetic';
+    context.font = 'bold 28px sans-serif';
+    context.fillText('300/700',300,730);
+    context.font = 'italic 28px sans-serif';
+    context.fillText('600/100',600,90);
+    context.fillText('900/700',900,730);
+    context.textBaseline = 'middle';
+    context.textAlign = 'right';
+    context.font = 'bold 28px sans-serif';
+    context.fillText('350/400',340,400);
+    context.textAlign = 'left';
+    context.font = 'italic 28px sans-serif';
+    context.fillText('850/400',860,400);
+
+  </script>
+
+
+
+</body></html>
