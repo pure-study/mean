@@ -3,9 +3,10 @@ CACHE MANIFEST
 /theme.css
 /logo.gif
 /main.js
+demo_time.js
 
 NETWORK:
 login.asp
 
 FALLBACK:
-/html5/offline.html
+/html5/ /offline.html
